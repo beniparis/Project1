@@ -1,0 +1,26 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 #!/bin/bash\
+\
+nums=$(echo \{0..9\})\
+states=('Maine' 'Oregon' 'Arizona' 'Hawaii' 'Florida')\
+\
+for num in $\{nums[@]\}; do\
+  if [ $num = 3 ] || [ $num = 5 ] || [ $num = 7 ]; then\
+    echo $num\
+  fi\
+done\
+\
+for state in $\{states[@]\}; do\
+  if [ $state == 'Oregon' ]; then\
+    echo "Oregon is the best!"\
+  else\
+    echo "I'm not a fan of Oregon."\
+  fi\
+done\
+}
