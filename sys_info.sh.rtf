@@ -7,26 +7,34 @@
 
 \f0\fs24 \cf0 #!/bin/bash\
 \
+#Determine variables/lists\
 output=$HOME/research/sys_info.txt\
+files=('/etc/passwd' '/etc/shadow')\
 \
+#Check if user is root, exit if not\
 if [ $UID -ne 0 ]\
 then\
   echo "Please run this script as root."\
   exit\
 fi\
 \
+#check if research directory is present, if not, make it\
 if [ ! -d $HOME/research ]\
 then\
   mkdir $HOME/research\
 fi\
 \
+#check if output file exists, if so, delete it\
 if [ -f $output ]\
 then\
   rm $output\
 fi\
 \
+#Output file header (title and date)\
 echo -e "This is a basic auditing script \\n" > $output\
 date >> $output\
+\
+#Annotate output file with system information\
 echo -e "\\n Machine Type: \\n $MACHTYPE \\n" >> $output\
 echo -e "Uname info: \\n  $(uname -a) \\n" >> $output\
 echo -e "IP Addresses: \\n  $(ip addr | grep inet) \\n" >> $output\
@@ -40,4 +48,21 @@ lscpu | grep CPU >> $output\
 echo -e "\\nDisk Usage" >> $output\
 df -H | head -2 >> $output\
 echo -e "Who is logged in: \\n $(who) \\n" >> $output\
+echo -e "\\n777 Files:" >>  $output\
+find / -type f -perm 777 >> $output\
+echo -e "\\nTop 10 Processes" >> $output\
+ps aux -m | head >> $output\
+\
+#List permissions for sensitive files.\
+\pard\pardeftab720\partightenfactor0
+\cf0 echo -e "\\nThe permissions for sensitive /etc files: \\n" >> $output\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+\cf0 for file in $\{files[@]\}\
+do\
+ls -l $file >> $output\
+done\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
 }

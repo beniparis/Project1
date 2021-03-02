@@ -7,15 +7,18 @@
 
 \f0\fs24 \cf0 #!/bin/bash\
 \
+#Lists to be used in this script\
 nums=$(echo \{0..9\})\
 states=('Maine' 'Oregon' 'Arizona' 'Hawaii' 'Florida')\
 \
+#Match numbers from first list\
 for num in $\{nums[@]\}; do\
   if [ $num = 3 ] || [ $num = 5 ] || [ $num = 7 ]; then\
     echo $num\
   fi\
 done\
 \
+#Match states from second list\
 for state in $\{states[@]\}; do\
   if [ $state == 'Oregon' ]; then\
     echo "Oregon is the best!"\
